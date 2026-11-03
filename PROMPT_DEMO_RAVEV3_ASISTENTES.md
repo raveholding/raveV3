@@ -1,7 +1,7 @@
 # SISTEMA VB · PROMPT DE VERSIÓN — DEMO «CON ASISTENTES INTELIGENTES SVB R2AVE» (repositorio `raveV3`)
 
-**Versión:** V26.44 · 2026-11-02 · **Producto:** SISTEMA VB de **VINCULAR BUSINESS** · **Publicación:** `https://raveholding.github.io/raveV3/`
-**Para qué es:** la demo «como Almacén RAVE» (rubros por persona, socios, reparto y cierre por rubro, Club, mayorista/minorista) **más el Centro Inteligente con el equipo oficial SVB R2AVE** y su centro de operaciones vivo. Acá se desarrolla y se prueba todo lo de asistentes antes de decidir si se lleva a Almacén RAVE.
+**Versión:** V26.46 · 2026-11-03 · **Producto:** SISTEMA VB de **VINCULAR BUSINESS** · **Publicación:** `https://raveholding.github.io/raveV3/`
+**Para qué es (V26.46, pedido del dueño del 2026-11-03):** mostrar el **Centro Inteligente**. Es una demo **genérica de un solo dueño** («Mi Comercio», la misma base de raveV2, todo rotulado «ejemplo») **más** el Centro Inteligente con el equipo SVB R2AVE, su centro de operaciones vivo y el **mapa básico** del local (automático por categorías). **No** lleva datos ni personalización de Almacén RAVE: sin nombre, dirección, rubros por persona, socios ni reparto; sin «Editar local», sin «plano de ejemplo SVB» y sin personal con fotos, nombre visible ni avatar. La personalización completa vive sólo en Almacén RAVE.
 
 > Los requisitos de cada módulo están en el prompt maestro genérico `SISTEMA_VB_26F.md`. Este prompt agrega lo propio de esta versión: el equipo SVB R2AVE (especificación del 2026-11-01), el **centro inteligente vivo** (especificación del 2026-11-02) y el **principio rector de integridad**, que manda sobre todo lo demás. Si hay conflicto, el orden es: **principio rector → este prompt → maestro**.
 
@@ -36,12 +36,12 @@ La prioridad máxima es **no cometer errores que comprometan el sistema, los dat
 
 | Versión | Repositorio | Compilación | Asistentes |
 |---|---|---|---|
-| Cliente Almacén RAVE (producción) | `AlmacenRAVE` | `cliente` | Centro Inteligente V26.41 apagado; **sin** SVB R2AVE hasta que el dueño apruebe raveV3 |
+| Cliente Almacén RAVE (producción) | `AlmacenRAVE` | `cliente` | **Sí** desde V26.45 (aprobado): Centro + equipo SVB R2AVE + centro vivo + personalización completa (editor del local, plano SVB, personal con fotos); apagado hasta que el administrador lo activa |
 | Demo mayorista | `KiniDistribuidoraDemo` | `kini` | No |
-| Demo un solo dueño | `raveV2` | `solo` | No |
-| **Demo con asistentes** (ESTA) | `raveV3` | `v3` | **Sí**: Centro Inteligente + equipo SVB R2AVE + centro vivo |
+| Demo un solo dueño | `raveV2` | `solo` | **No**: sin Centro Inteligente ni asistentes |
+| **Demo con asistentes** (ESTA) | `raveV3` | `v3` | **Sí**: base genérica de un solo dueño + Centro Inteligente + equipo SVB R2AVE + centro vivo + **mapa básico** (sin personalización de Almacén RAVE) |
 
-Una sola fuente de código (`AlmacenRAVE/fuente`, rama de trabajo `centro-r2ave`). La compilación `v3` es la **única** que incluye `p10b-r2ave.js` (equipo) y `p10c-vivo.js` (centro vivo). La base local propia es `rave-v3-demo-v1`.
+Una sola fuente de código (`AlmacenRAVE/fuente`, rama de trabajo `centro-r2ave`). La compilación `v3` es la **única** que incluye `p10b-r2ave.js` (equipo) y `p10c-vivo.js` (centro vivo). La base local propia es `rave-v3-demo-v2` (V26.46: se cambió para que quien ya había abierto raveV3 no conserve los datos viejos parecidos a Almacén RAVE).
 
 ## 2. El equipo oficial SVB R2AVE
 
@@ -167,3 +167,13 @@ Qué cubre `vv1`:
 - **Funciones de los especialistas:** hoy sólo consultan. Si el dueño quiere que alguno haga algo (por ejemplo, NÉBULA enviando promociones), hace falta la autorización, la integración real (WhatsApp Business o correo) y pruebas.
 - **Modelos 3D reales con esqueleto:** los puntos 2 y 3 de la sección 3.
 - **Llevar R2AVE y el centro vivo a Almacén RAVE:** sólo con la demostración aprobada en raveV3.
+
+## 8. V26.46 · raveV3 genérica con mapa básico (2026-11-03)
+
+- **Base:** la misma de raveV2 (`isSoloBuild()` vale para los perfiles `solo` y `v3`): «Mi Comercio», un solo dueño, categorías y catálogo genéricos de ejemplo. Título «Mi Comercio · Demo con asistentes inteligentes · Sistema VB».
+- **Centro Inteligente con los asistentes:** igual que antes (equipo, centro vivo, chat, alertas, RR. HH., permisos de los asistentes, corrección de stock de R2AVE apagada por defecto).
+- **Mapa básico:** `CI.basic()` (sólo perfil `v3`) hace que el plano sea siempre el automático por categorías (ignora un plano guardado), oculta «Editar local» y «Cargar el plano de ejemplo SVB» (tampoco se abren llamándolos directo) y la ficha de cada persona no ofrece foto, nombre visible, avatar ni color.
+- **Contraste:** en raveV3 el acento del Centro es `#45ad92` (≥ 5,4:1 sobre su fondo oscuro); en las demos genéricas el ítem activo del menú lateral lleva texto negro (5,0:1).
+- **Almacén RAVE no cambia:** todo lo anterior sólo se activa con el perfil `v3`.
+- **Pruebas:** `v3b` 17/17 (nueva), `ci6` 61/61, `vv1` 43/43; regresión `sv1` 18/18, `kc1` 39/39, `cr1` 15/15, `ci1`–`ci5`, `v1 v2 v4 v7 d1 p1 ws1 k3 k4 pq1 resp4` sin fallas.
+- **Reversión:** volver a publicar el `index.html` del commit anterior de raveV3 (`1b5e7fb`, V26.44).
